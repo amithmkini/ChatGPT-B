@@ -3,6 +3,7 @@ const express = require('express');
 const { Configuration, OpenAIApi } = require("openai");
 
 const ChatMessage = require('../models/messageModel');
+const TokenCount = require('../models/tokenCountModel');
 
 const router = express.Router();
 
@@ -12,6 +13,12 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
   const { chatId, message } = req.body;
+  const tokenCount = await TokenCount.findOne({ chatId: chatId });
+  if (tokenCount) {
+    if (tokenCount.numTokens >= process.env.OPENAI_MAX_TOKENS) {
+      return res.json({ message: "You've reached the maximum limit. Refresh page to start over." });
+    }
+  }
   const currentUserMessage = { role: 'user', content: message };
   const userMessage = new ChatMessage({
     chatId,
@@ -79,6 +86,9 @@ router.post('/', async (req, res) => {
 
         await Promise.all([userMessage.save(), botMessage.save()]);
 
+        const totalTokens = completion.data.usage.total_tokens;
+        await TokenCount.updateTokenCount(chatId, totalTokens);
+        
         return res.json({ message: botMessage.text });
       }
     }
