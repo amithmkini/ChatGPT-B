@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -13,6 +14,16 @@ app.use(bodyParser.json());
 app.use(cors({
   origin: `${process.env.REACT_APP_URL}}`,
 }));
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'client/build')));
+
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
 
 // Routes
 app.use('/api/messages', messageRoutes);
