@@ -19,10 +19,11 @@ app.use('/api/messages', messageRoutes);
 
 // DB Config
 mongoose.connect(
-  `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@` +
-  `${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/` + 
+  `${process.env.MONGO_PROTOCOL}://` + 
+  `${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@` +
+  `${process.env.MONGO_HOST}${process.env.MONGO_PORT}/` + 
   `${process.env.MONGO_DATABASE}` + 
-  `?authSource=admin&authMechanism=SCRAM-SHA-256`,)
+  `${process.env.MONGO_OPTIONS}`,)
   .then(() => console.log('MongoDB connected...'))
   .catch((err) => console.log(err));
 
