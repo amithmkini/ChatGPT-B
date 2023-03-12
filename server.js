@@ -14,7 +14,7 @@ const updateChatBotPrompt = () => {
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
   const dateString = ` Current date: ${year}-${month}-${day}`;
-  const prompt = process.env.OPENAI_SYSTEM_PROMPT + dateString;
+  const prompt = process.env.OPENAI_SYSTEM_PROMPT_TEMPLATE + dateString;
   process.env.OPENAI_SYSTEM_PROMPT = prompt;
 };
 
