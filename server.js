@@ -11,9 +11,7 @@ const app = express();
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors({
-  origin: `${process.env.REACT_APP_URL}}`,
-}));
+app.use(cors());
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
