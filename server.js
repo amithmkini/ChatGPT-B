@@ -4,7 +4,26 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
+const cron = require('node-cron');
 
+// Update the OPENAI_SYSTEM_PROMPT in the .env file
+// every 24 hours, and when the server starts
+const updateChatBotPrompt = () => {
+  const date = new Date();
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const dateString = ` Current date: ${year}-${month}-${day}`;
+  const prompt = process.env.OPENAI_SYSTEM_PROMPT + dateString;
+  process.env.OPENAI_SYSTEM_PROMPT = prompt;
+};
+
+updateChatBotPrompt();
+cron.schedule('0 0 * * *', () => {
+  updateChatBotPrompt();
+});
+
+// Routes
 const messageRoutes = require('./routes/messageRoute');
 const app = express();
 
