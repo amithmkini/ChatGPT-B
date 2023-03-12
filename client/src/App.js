@@ -50,6 +50,11 @@ function App() {
 
 
   const handleChange = (e) => setInput(e.target.value);
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !(e.shiftKey || e.ctrlKey)) {
+      handleSubmit(e);
+    }
+  };
 
   return (
     <div className="container">
@@ -63,10 +68,10 @@ function App() {
       </div>
       <form onSubmit={handleSubmit} className="input-form">
         <div className="input-container">
-          <input
-            type="text"
+          <textarea
             value={input}
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
             className="input-field"
             placeholder="Type your message here..."
           />

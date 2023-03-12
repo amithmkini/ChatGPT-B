@@ -52,6 +52,7 @@ body {
 
 .form {
   display: flex;
+  width: 90%;
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
@@ -62,32 +63,37 @@ body {
 .input-container {
   position: relative;
   margin-bottom: 10px;
+  padding: 5px;
 }
 
 .input-field {
   width: 100%;
   padding: 10px 50px 10px 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 
 input, textarea {
+  resize: none;
+  height: 38px;
+  scrollbar-width: none;
   font-size: 16px;
   /* Disable auto zoom on mobile */
   font-size: 16px;
   -moz-text-size-adjust: none;
+  max-height: calc(1.5 * 6em);
 }
 
 .send-button {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 40px;
+  top: 6px;
+  right: 5px;
+  width: 38px;
+  height: 38px;
   background-color: #4caf50;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 21px;
   cursor: pointer;
 }
 
