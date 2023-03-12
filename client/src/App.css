@@ -11,12 +11,13 @@ body {
 .container {
   max-width: 800px;
   margin: 0 auto;
+  overflow: auto;
 }
 
 .messages {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 200px);
   overflow-y: scroll;
   scrollbar-width: none;
   /* border: 1px solid #ccc; */
@@ -68,6 +69,13 @@ body {
   padding: 10px 50px 10px 10px;
   border: none;
   border-radius: 5px;
+}
+
+input, textarea {
+  font-size: 16px;
+  /* Disable auto zoom on mobile */
+  font-size: 16px;
+  -moz-text-size-adjust: none;
 }
 
 .send-button {
