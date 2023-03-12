@@ -53,7 +53,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>ChatBot</h1>
+      <h1>ChatGPT-B</h1>
       <div id="messages-container" className="messages">
         {messages.map((message, index) => (
           <div className={`message ${message.isUser ? 'user' : ''}`} key={index}>
