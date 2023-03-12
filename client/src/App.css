@@ -33,7 +33,6 @@ body {
   background-color: #f2f2f2;
   border-radius: 10px;
   align-self: flex-start;
-  max-width: 50%;
 }
 
 .message.user {
@@ -82,4 +81,16 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+code {
+  display: block;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 1em;
+  margin: 0;
+  overflow: auto;
+  font-size: 0.9em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

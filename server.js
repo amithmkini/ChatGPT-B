@@ -10,7 +10,9 @@ const app = express();
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  origin: `${process.env.REACT_APP_URL}}`,
+}));
 
 // Routes
 app.use('/api/messages', messageRoutes);
